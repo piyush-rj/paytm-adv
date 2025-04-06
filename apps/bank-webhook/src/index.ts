@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json())
 
 app.post("/hdfcWebhook", async (req, res) => {
-    //TODO: Add zod validation here?
+    //TODO: Add zod validation here
     //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
     const paymentInformation: {
         token: string;
@@ -25,7 +25,7 @@ app.post("/hdfcWebhook", async (req, res) => {
                 },
                 data: {
                     amount: {
-                        // You can also get this from your DB
+                        // can also get this from DB
                         increment: Number(paymentInformation.amount)
                     }
                 }

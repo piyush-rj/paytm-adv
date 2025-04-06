@@ -11,7 +11,7 @@ export const authOptions = {
                 password: { label: "Password", type:"password", placeholder:"enter password"}
             },
             async authorize (credentials: any) {
-                // zod and otp validation
+                // add zod and otp validation
                 const hashedPassword = await bcrypt.hash(credentials.password, 10)
                 const existingUser = await db.user.findFirst({
                     where: {
@@ -28,7 +28,7 @@ export const authOptions = {
                             email: existingUser.number
                         }
                     } else {
-                        throw new Error(" incorrect password ")
+                        throw new Error("Incorrect assword")
                     }
                 }
 
@@ -39,6 +39,7 @@ export const authOptions = {
                             password: hashedPassword
                         }
                     });
+                    // do otp validation here
 
                     return {
                         id: user.id.toString(),

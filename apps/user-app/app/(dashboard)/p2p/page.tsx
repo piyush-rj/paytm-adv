@@ -1,7 +1,8 @@
-import { SendCard } from "../../../components/SendCard"
+
+import { SendCard } from "../../../components/SendCard";
 
 export default function() {
-    return <div>
-        Dashboard
+    return <div className="w-full">
+        <SendCard />
     </div>
 }

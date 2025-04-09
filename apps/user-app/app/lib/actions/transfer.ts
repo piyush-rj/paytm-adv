@@ -65,7 +65,7 @@ export async function p2pTransfer(to: string, amount: number){
 
         await e.p2pTransfer.create({
             data: {
-                fromUserId: sender,
+                fromUserId: Number(sender),
                 toUserId: receiver.id,
                 amount,
                 timestamp: new Date()

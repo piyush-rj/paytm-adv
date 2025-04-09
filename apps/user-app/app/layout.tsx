@@ -18,10 +18,12 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html suppressHydrationWarning lang="en">
-      <Providers>
-        <AppbarClient/>
-          <body className={inter.className}>{children}</body>
-      </Providers>
+      <body>
+        <Providers>
+          <AppbarClient/>
+            <body className={inter.className}>{children}</body>
+        </Providers>
+      </body>
     </html>
   );
 }

@@ -44,6 +44,10 @@ async function getDoneP2PTransactions() {
 
 async function getReceiveP2PTransactions() {
   const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    // Handle the case when user is not authenticated
+    return []; // Return empty array or handle as needed
+  }
   const txns = await prisma.p2pTransfer.findMany({
     where: {
       toUserId: Number(session?.user?.id)

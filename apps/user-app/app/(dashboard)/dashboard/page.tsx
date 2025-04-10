@@ -6,9 +6,9 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-blue-600">PayTM</h1>
         <nav className="flex gap-6">
           <a href="#" className="hover:text-blue-500 font-medium">Wallet</a>
-          <a href="#" className="hover:text-blue-500 font-medium">Recharge</a>
-          <a href="#" className="hover:text-blue-500 font-medium">Bills</a>
-          <a href="#" className="hover:text-blue-500 font-medium">Support</a>
+          <a href="#" className="hover:text-blue-500 font-medium">Transactions</a>
+          <a href="#" className="hover:text-blue-500 font-medium">Transfer</a>
+          <a href="#" className="hover:text-blue-500 font-medium">About</a>
         </nav>
       </header>
 

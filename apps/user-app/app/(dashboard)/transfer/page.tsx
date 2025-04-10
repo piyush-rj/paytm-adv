@@ -46,15 +46,15 @@ export default async function() {
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
 
-    return <div className="w-screen">
-        <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
+    return <div className="w-full">
+        <div className="text-4xl text-[#000] pt-8 mb-8 font-bold flex justify-center">
             Transfer
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-10">
             <div>
                 <AddMoney />
             </div>
-            <div>
+            <div className="pr-10">
                 <BalanceCard amount={balance.amount} locked={balance.locked} />
                 <div className="pt-4">
                     <OnRampTransactions transactions={transactions}/>

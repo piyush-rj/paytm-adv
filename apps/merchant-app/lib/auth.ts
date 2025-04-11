@@ -1,8 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import db from "@repo/db/client";
-import { NextAuthOptions } from "next-auth";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -10,16 +9,18 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     callbacks: {
-      async signIn({ user, account }) {
-        console.log("hi signin");
-        
-        // Use type narrowing instead of a custom type definition
-        if (!user?.email || !account) {
-          return false;
+      async signIn({ user, account }: {
+        user: {
+          email: string;
+          name: string;
+          id: Number
+        },
+        account: {
+          provider: "google" | "github"
         }
-
-        // Make sure the provider is what you expect
-        if (account.provider !== "google" && account.provider !== "github") {
+      }) {
+        console.log("hi signin")
+        if (!user || !user.email) {
           return false;
         }
 
@@ -32,12 +33,12 @@ export const authOptions: NextAuthOptions = {
           },
           create: {
             email: user.email,
-            name: user.name || "",
-            auth_type: account.provider === "google" ? "Google" : "Github"
+            name: user.name,
+            auth_type: account.provider === "google" ? "Google" : "Github" // Use a prisma type here
           },
           update: {
-            name: user.name || "",
-            auth_type: account.provider === "google" ? "Google" : "Github"
+            name: user.name,
+            auth_type: account.provider === "google" ? "Google" : "Github" // Use a prisma type here
           }
         });
 
@@ -45,4 +46,4 @@ export const authOptions: NextAuthOptions = {
       }
     },
     secret: process.env.NEXTAUTH_SECRET || "secret"
-}
+  }

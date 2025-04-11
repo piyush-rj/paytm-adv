@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "../provider";
 import { AppbarClient } from "../components/AppbarClient";
 import { Toaster } from "react-hot-toast";
+import RecoilWrapper from "../components/RecoilRoot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,11 @@ export default function RootLayout({
               },
             }}
             position="top-center" reverseOrder={false}/>
-            <body className={inter.className}>{children}</body>
+            <RecoilWrapper>
+              <body className={inter.className}>
+                {children}
+              </body>
+            </RecoilWrapper>
         </Providers>
       </body>
     </html>

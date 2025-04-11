@@ -13,7 +13,7 @@ const getStatement = (status : string) => {
 
 export const OnRampTransactions = ({
     transactions,
-    title = "transactions",
+    title = "Transactions",
 }: {
     transactions: {
         time: Date,

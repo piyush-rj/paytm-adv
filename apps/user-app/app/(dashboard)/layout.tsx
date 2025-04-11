@@ -1,4 +1,8 @@
+"use client"
+
+import { BackgroundBeams } from "../../components/background-lines";
 import { SidebarItem } from "../../components/SidebarItem";
+import ThemeToggle from "../../components/ThemeToggleButton";
 
 export default function Layout({
   children,
@@ -6,20 +10,33 @@ export default function Layout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex-1 px-4 pt-4 pb-24">{children}</div>
+    <div className="flex flex-col min-h-screen dark:bg-black bg-white">
+      <div className="absolute inset-0 -z-10 ">
+        <BackgroundBeams/>
+      </div>
+      <div className="flex-1 px-4 pt-4 pb-24 dark:bg-black">{children}</div>
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 w-full border-t border-slate-300 bg-white z-50">
-        <div className="flex justify-around py-3">
-          <SidebarItem href="/dashboard" icon={<HomeIcon />} title="Home" />
-          <SidebarItem href="/transfer" icon={<TransferIcon />} title="Wallet" />
-          <SidebarItem href="/transactions" icon={<TransactionsIcon />} title="Transactions" />
-          <SidebarItem href="/p2p" icon={<P2PTransferIcon />} title="P2P" />
-          <SidebarItem href="/p2p" icon={<LightModeIcon />} title="" />
-          <SidebarItem href="/p2p" icon={<DarkModeIcon />} title="" />
+    <div className="fixed bottom-0 left-0 right-0 z-50 mb-4 flex justify-center w-full">
+      <div className="w-[90%] max-w-90% rounded-2xl border border-slate-800 bg-white dark:bg-gray-950 dark:border-slate-700 shadow-lg px-4 py-3 flex items-center justify-between">
+        {/* Main Navigation */}
+      <div className="flex justify-around flex-grow gap-4">
+        <SidebarItem href="/dashboard" icon={<HomeIcon />} title="Home" />
+        <SidebarItem href="/transfer" icon={<TransferIcon />} title="Wallet" />
+        <SidebarItem href="/transactions" icon={<TransactionsIcon />} title="Transactions" />
+        <SidebarItem href="/p2p" icon={<P2PTransferIcon />} title="P2P" />
+      </div>
+
+    {/* Divider */}
+    <div className="w-px h-6 bg-slate-300 dark:bg-slate-700 mx-2" />
+
+        {/* Theme Toggle */}
+        <div className="shrink-0 ml-2 mr-1">
+          <ThemeToggle />
         </div>
       </div>
+    </div>
+
     </div>
   );
 }

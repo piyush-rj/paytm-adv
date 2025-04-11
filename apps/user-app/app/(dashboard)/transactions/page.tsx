@@ -70,13 +70,13 @@ export default async function () {
 
 
   return (
-    <div className="pl-10 pr-10 flex flex-col gap-5 justify-center">
-      <h1 className="text-4xl flex justify-center text-[#000] pt-8 mb-4 font-bold border-b pb-10">
-        Transactions
+    <div className="pl-10 pr-10 flex flex-col gap-5 justify-center h-full dark:bg-black ml-[200px] mr-[200px]">
+      <h1 className="text-6xl dark:text-gray-800 tracking-wide flex justify-center text-[#000] pt-8 mb-4 font-bold pb-6">
+        TRANSACTIONS
       </h1>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 px-10 gap-3 border-b pb-10 ">
-        <h1 className="text-2xl text-[#000] pb-4 font-bold col-span-2">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 px-10 gap-3 border-b dark:border-gray-800 pb-10 ">
+        <h1 className="text-3xl text-[#000] pb-4 font-bold col-span-2 dark:text-gray-600">
           P2P Transactions
         </h1>
 
@@ -94,8 +94,8 @@ export default async function () {
         </div>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 px-10 gap-3">
-        <h1 className="text-2xl text-[#000] font-bold col-span-2 pb-4 pt-4">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 px-10 gap-3 dark:bg-black">
+        <h1 className="text-3xl text-[#000] font-bold col-span-2 pb-4 pt-4 dark:text-gray-600">
           Wallet Transactions
         </h1>
         <div>

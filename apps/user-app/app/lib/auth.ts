@@ -1,10 +1,11 @@
-import db from "@repo/db/client";
+import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import db from "@repo/db/client";
+import type { User, Account, Profile, Session } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 
-// add otp and zod validation
-
-export const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Phone Number",
@@ -12,7 +13,7 @@ export const authOptions = {
         phone: { label: "Phone", type: "text" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials: any) {
+      async authorize(credentials) {
         if (!credentials?.phone || !credentials?.password) {
           throw new Error("Phone number and password are required");
         }
@@ -22,7 +23,6 @@ export const authOptions = {
         });
 
         if (!user) {
-          // throw redirect to signup
           throw new Error("User not found. Please sign up.");
         }
 
@@ -40,16 +40,40 @@ export const authOptions = {
     })
   ],
   pages: {
-    signIn: '/auth/signin',
-    error: '/auth/error'
+    signIn: "/auth/signin",
+    error: "/auth/error"
   },
   callbacks: {
-    
-    async redirect({ baseUrl }: any) {
+    async signIn({
+      user,
+      account,
+      profile,
+      email,
+      credentials
+    }: {
+      user: User;
+      account: Account | null;
+      profile?: Profile;
+      email?: { verificationRequest?: boolean };
+      credentials?: Record<string, unknown>;
+    }) {
+      // Optional check if you want to restrict sign-ins
+      if (!user?.id) return false;
+      return true;
+    },
+    async redirect({ baseUrl }: { baseUrl: string }) {
       return `${baseUrl}/dashboard`;
     },
-    async session({ token, session }: any) {
-      if (token?.sub) session.user.id = token.sub;
+    async session({
+      session,
+      token
+    }: {
+      session: Session;
+      token: JWT;
+    }) {
+      if (token?.sub && session.user) {
+        (session.user as { id: string }).id = token.sub;
+      }
       return session;
     }
   },

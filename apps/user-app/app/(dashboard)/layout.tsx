@@ -10,11 +10,11 @@ export default function Layout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <div className="flex flex-col min-h-screen dark:bg-black bg-white">
+    <div className="flex flex-col min-h-screen dark:bg-black">
       <div className="absolute inset-0 -z-10 ">
         <BackgroundBeams/>
       </div>
-      <div className="flex-1 px-4 pt-4 pb-24 dark:bg-black">{children}</div>
+      <div className="flex-1 px-4 pt-4 pb-24 ">{children}</div>
 
       {/* Bottom Navigation */}
     <div className="fixed bottom-0 left-0 right-0 z-50 mb-4 flex justify-center w-full">

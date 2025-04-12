@@ -1,3 +1,5 @@
+
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -41,9 +43,9 @@ export default function Home() {
           </div>
           <div>
             <img
-              src="/hero-img.svg"
+              src="/money.png"
               alt="PayTM App"
-              className="w-full max-w-md drop-shadow-xl"
+              className="w-[330px] max-w-md drop-shadow-xl mr-10 mb-5"
             />
           </div>
         </div>

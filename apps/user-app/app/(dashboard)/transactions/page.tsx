@@ -7,12 +7,12 @@ import prisma from '@repo/db/client';
 async function getOnRampTransactions(status: any) {
 
   const session = await getServerSession(authOptions);
-  if(!session?.user?.id){
-    return [];
-  }
+  // if(!session?.user?.id){
+  //   return [];
+  // }
   const txns = await prisma.onRampTransaction.findMany({
     where: {
-      userId: Number(session?.user?.id),
+      userId: Number(session.user.id),
       status: status
     }
   })
@@ -26,9 +26,9 @@ async function getOnRampTransactions(status: any) {
 
 async function getDoneP2PTransactions() {
   const session = await getServerSession(authOptions)
-  if(!session?.user?.id){
-    return [];
-  }
+  // if(!session?.user?.id){
+  //   return [];
+  // }
   const txns = await prisma.p2pTransfer.findMany({
     where: {
       fromUserId: Number(session?.user?.id)
@@ -44,13 +44,12 @@ async function getDoneP2PTransactions() {
 
 async function getReceiveP2PTransactions() {
   const session = await getServerSession(authOptions)
-  if (!session?.user?.id) {
-    // Handle the case when user is not authenticated
-    return []; // Return empty array or handle as needed
-  }
+  // if (!session?.user?.id) {
+  //   return []; 
+  // }
   const txns = await prisma.p2pTransfer.findMany({
     where: {
-      toUserId: Number(session?.user?.id)
+      toUserId: Number(session.user.id)
     }
   })
   return txns.map((t) => ({

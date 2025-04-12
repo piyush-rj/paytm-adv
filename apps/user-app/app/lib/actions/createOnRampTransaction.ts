@@ -13,6 +13,7 @@ export async function createOnRampTransaction(provider: string, amount: number) 
         }
     }
     const token = (Math.random() * 1000).toString();
+    const safeAmount = Math.abs(amount);
     await prisma.onRampTransaction.create({
         data: {
             provider,
@@ -20,7 +21,7 @@ export async function createOnRampTransaction(provider: string, amount: number) 
             startTime: new Date(),
             token: token,
             userId: Number(session?.user?.id),
-            amount: amount * 100
+            amount: safeAmount * 100
         }
     });
 

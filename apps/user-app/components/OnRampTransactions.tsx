@@ -1,16 +1,6 @@
 import { Card } from "@repo/ui/card"
 
 
-const getStatement = (status : string) => {
-    if(status == "Success"){
-        return "Received"
-    } else if (status == "Processing"){
-        return "Processing"
-    } else {
-        return "Failed"
-    }
-}
-
 export const OnRampTransactions = ({
     transactions,
     title = "Transactions",
@@ -38,17 +28,30 @@ export const OnRampTransactions = ({
 
                 <div>
                     <div className="text-sm">
-                        {getStatement(t.status)}
+                        {getStatement(t.status, title)}
                     </div>
                     <div className="text-slate-600 text-xs">
                         {t.time.toDateString()}
                     </div>
                 </div>
                 <div className="flex flex-col justify-center">
-                    + Rs {t.amount / 100}
+                     Rs {Math.abs(t.amount / 100)}
                 </div>
 
             </div>)}
         </div>
     </Card>
+}
+
+const getStatement = (status : string, title? : string) => {
+    if(title == "Sent transactions" && status == "Success"){
+        return "Sent"
+    }
+    if(status == "Success"){
+        return "Received"
+    } else if (status == "Processing"){
+        return "Processing"
+    } else {
+        return "Failed"
+    }
 }

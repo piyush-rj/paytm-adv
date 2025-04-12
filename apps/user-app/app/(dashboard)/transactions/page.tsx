@@ -31,14 +31,14 @@ async function getDoneP2PTransactions() {
   // }
   const txns = await prisma.p2pTransfer.findMany({
     where: {
-      fromUserId: Number(session?.user?.id)
+      fromUserId: Number(session?.user?.id),
     }
   })
   return txns.map((t) => ({
     time: t.timestamp,
     amount: t.amount,
     status: "Success",
-    provider: t.toUserId
+    provider: t.toUserId,
   }))
 }
 

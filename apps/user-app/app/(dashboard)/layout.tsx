@@ -1,5 +1,6 @@
 "use client"
 
+import { Toaster } from "react-hot-toast";
 import { BackgroundBeams } from "../../components/background-lines";
 import { SidebarItem } from "../../components/SidebarItem";
 import ThemeToggle from "../../components/ThemeToggleButton";
@@ -16,15 +17,16 @@ export default function Layout({
       </div>
       <div className="flex-1 px-4 pt-4 pb-24 ">{children}</div>
 
+
       {/* Bottom Navigation */}
     <div className="fixed bottom-0 left-0 right-0 z-50 mb-4 flex justify-center w-full">
       <div className="w-[90%] max-w-90% rounded-2xl border border-slate-800 bg-white dark:bg-gray-950 dark:border-slate-700 shadow-lg px-4 py-3 flex items-center justify-between">
         {/* Main Navigation */}
       <div className="flex justify-around flex-grow gap-4">
         <SidebarItem href="/dashboard" icon={<HomeIcon />} title="Home" />
-        <SidebarItem href="/transfer" icon={<TransferIcon />} title="Wallet" />
-        <SidebarItem href="/transactions" icon={<TransactionsIcon />} title="Transactions" />
-        <SidebarItem href="/p2p" icon={<P2PTransferIcon />} title="P2P" />
+        <SidebarItem href="/wallet" icon={<TransferIcon />} title="Wallet" />
+        <SidebarItem href="/transactions" icon={<TransactionsIcon />} title="All transactions" />
+        <SidebarItem href="/p2p" icon={<P2PTransferIcon />} title="Transfer" />
       </div>
 
     {/* Divider */}

@@ -28,15 +28,15 @@ app.post("/hdfcWebhook", async (req, res) => {
         })
     }
 
-    
+    const safeAmount = Math.abs(req.body.amount)
     const paymentInformation: {
         token: string;
         userId: string;
-        amount: string
+        amount: number
     } = {
         token: req.body.token,
         userId: req.body.user_identifier,
-        amount: req.body.amount
+        amount: safeAmount
     };
 
     try {
@@ -47,7 +47,7 @@ app.post("/hdfcWebhook", async (req, res) => {
                 },
                 data: {
                     amount: {
-                        // You can also get this from your DB
+                        // can also get this from your DB
                         increment: Number(paymentInformation.amount)
                     }
                 }

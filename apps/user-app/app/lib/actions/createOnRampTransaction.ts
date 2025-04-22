@@ -14,7 +14,7 @@ export async function createOnRampTransaction(provider: string, amount: number) 
     }
     const token = (Math.random() * 1000).toString();
     const safeAmount = Math.abs(amount);
-    await prisma.onRampTransaction.create({
+    const data = await prisma.onRampTransaction.create({
         data: {
             provider,
             status: "Processing",
@@ -24,6 +24,7 @@ export async function createOnRampTransaction(provider: string, amount: number) 
             amount: safeAmount * 100
         }
     });
+    console.log(`on ramp transaction initiated : ${data}`, data)
 
     return {
         message: "Done"

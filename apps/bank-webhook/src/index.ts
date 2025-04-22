@@ -4,10 +4,9 @@ const app = express();
 
 app.use(express.json())
 
-// @ts-ignore
 app.post("/hdfcWebhook", async (req, res) => {
-    //TODO: Add zod validation here?
-    //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
+    console.log(req.body)
+
     const token = req.body.token;
     if(!token){
         return res.status(403).json( {
@@ -35,19 +34,19 @@ app.post("/hdfcWebhook", async (req, res) => {
         amount: number
     } = {
         token: req.body.token,
-        userId: req.body.user_identifier,
+        userId: req.body.userId,
         amount: safeAmount
     };
 
     try {
+        console.log(paymentInformation)
         await db.$transaction([
-            db.balance.updateMany({
+            db.balance.update({
                 where: {
                     userId: Number(paymentInformation.userId)
                 },
                 data: {
                     amount: {
-                        // can also get this from your DB
                         increment: Number(paymentInformation.amount)
                     }
                 }
@@ -65,13 +64,36 @@ app.post("/hdfcWebhook", async (req, res) => {
         res.json({
             message: "Captured"
         })
+        return;
     } catch(e) {
         console.error(e);
         res.status(411).json({
             message: "Error while processing webhook"
         })
+        return;
     }
 
+})
+
+app.post("/payment", async (req, res) => {
+
+
+     const paymentInformation = await db.balance.findMany({
+        where: {
+            userId: Number(req.body.userId)
+        },
+        // data: {
+        //     amount: {
+        //         increment: Number(req.body.amount)
+        //     }
+        // }
+     })
+
+     console.log(paymentInformation);
+     res.json({
+        msg: "done"
+     })
+     return;
 })
 
 app.listen(3003);
